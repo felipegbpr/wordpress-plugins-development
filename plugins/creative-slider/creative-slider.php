@@ -29,6 +29,19 @@ You should have received a copy of the GNU General Public License
 along with Creative Slider. If not, see {URI to Plugin License}.
 */
 
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
   exit;
+}
+
+if ( ! class_exists( 'Creative_Slider' ) ) {
+  class Creative_Slider {
+    function __construct()
+    {
+      
+    }    
+  }
+}
+
+if ( class_exists( 'Creative_Slider' ) ) {
+  $creative_slider = new Creative_Slider();
 }
