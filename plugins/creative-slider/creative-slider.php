@@ -35,10 +35,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Creative_Slider' ) ) {
   class Creative_Slider {
-    function __construct()
-    {
-      
+    function __construct() {
+      $this->define_constants();
     }    
+
+    public function define_constants() {
+      define( 'CREATIVE_SLIDER_PATH', plugin_dir_path( __FILE__ ) );
+      define( 'CREATIVE_SLIDER_URL', plugin_dir_url( __FILE__ ) );
+      define( 'CREATIVE_VERSION', '1.0.0' );
+    }
+
   }
 }
 
