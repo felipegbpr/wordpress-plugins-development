@@ -48,6 +48,8 @@ if ( !class_exists( 'Creative_Slider_Post_Type' ) ) {
       );
     }
 
-    public function add_inner_meta_boxes( $post ) {}
+    public function add_inner_meta_boxes( $post ) {
+      require_once( CREATIVE_SLIDER_PATH . 'views/creative-slider_metabox.php' );
+    }
   }
 }
