@@ -1,3 +1,10 @@
+<?php 
+	$meta = get_post_meta( $post->ID );
+	$link_text = get_post_meta( $post->ID, 'creative_slider_link_text', true );
+	$link_url = get_post_meta( $post->ID, 'creative_slider_link_url', true );
+	// var_dump( $link_text, $link_url ); 
+?>
+
 <table class="form-table creative-slider-metabox"> 
     <tr>
         <th>
@@ -9,7 +16,7 @@
                 name="creative_slider_link_text" 
                 id="creative_slider_link_text" 
                 class="regular-text link-text"
-                value=""
+                value="<?php echo ( isset( $link_text ) ) ? esc_html( $link_text ) : ''; ?>"
                 required
             >
         </td>
@@ -24,7 +31,7 @@
                 name="creative_slider_link_url" 
                 id="creative_slider_link_url" 
                 class="regular-text link-url"
-                value=""
+                value="<?php echo ( isset( $link_url ) ) ? esc_url( $link_url ) : ''; ?>" 
                 required
             >
         </td>
