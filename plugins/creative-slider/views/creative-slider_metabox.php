@@ -6,6 +6,7 @@
 ?>
 
 <table class="form-table creative-slider-metabox"> 
+    <input type="hidden" name="creative_slider_nonce" value="<?php echo wp_create_nonce( "creative_slider_nonce" ); ?>">
     <tr>
         <th>
             <label for="creative_slider_link_text">Link Text</label>
