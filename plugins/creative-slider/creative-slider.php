@@ -38,6 +38,8 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
     function __construct() {
       $this->define_constants();
 
+      add_action( 'admin_menu', array( $this, 'add_menu' ) );
+
       require_once( CREATIVE_SLIDER_PATH . 'post-types/class.creative-slider-cpt.php' );
       $Creative_Slider_Post_Type = new Creative_Slider_Post_Type();
     }    
@@ -59,6 +61,21 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
 
     public static function uninstall() {
 
+    }
+
+    public function add_menu() {
+      add_menu_page( 
+        'Creative Slider Options',
+        'Creative Slider',
+        'manage_options',
+        'creative_slider_admin',
+        array( $this, 'creative_slider_settings_page' ),
+        'dashicons-images-alt2',
+      );
+    }
+
+    public function creative_slider_settings_page() {
+      echo "This is a test page";
     }
 
   }
