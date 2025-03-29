@@ -11,6 +11,9 @@ if ( ! class_exists('Creative_Slider_Settings' ) ) {
     }
 
     public function admin_init() {
+
+      register_setting( 'creative_slider_group', 'creative_slider_options' );
+
       add_settings_section(
         'creative_slider_main_section',
         'Hows does it work?',
@@ -21,7 +24,7 @@ if ( ! class_exists('Creative_Slider_Settings' ) ) {
       add_settings_field(
         'creative_slider_shortcode',
         'Shortcode',
-        null,
+        array( $this, 'creative_slider_shortcode_callback' ),
         'creative_slider_page1',
         'creative_slider_main_section'
       );
