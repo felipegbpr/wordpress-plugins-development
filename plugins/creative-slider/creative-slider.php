@@ -72,6 +72,26 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
         array( $this, 'creative_slider_settings_page' ),
         'dashicons-images-alt2',
       );
+
+      add_submenu_page(
+        'creative_slider_admin',
+        'Manage Slides',
+        'Manage Slides',
+        'manage_options',
+        'edit.php?post_type=creative-slider',
+        null,
+        null
+      );
+
+      add_submenu_page(
+        'creative_slider_admin',
+        'Add New Slide',
+        'Add New Slide',
+        'manage_options',
+        'post-new.php?post_type=creative-slider',
+        null,
+        null
+      );
     }
 
     public function creative_slider_settings_page() {
