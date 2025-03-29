@@ -42,6 +42,9 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
 
       require_once( CREATIVE_SLIDER_PATH . 'post-types/class.creative-slider-cpt.php' );
       $Creative_Slider_Post_Type = new Creative_Slider_Post_Type();
+
+      require_once( CREATIVE_SLIDER_PATH . 'class.creative-slider-settings.php' );
+      $Creative_Slider_Settings = new Creative_Slider_Settings();
     }    
 
     public function define_constants() {
