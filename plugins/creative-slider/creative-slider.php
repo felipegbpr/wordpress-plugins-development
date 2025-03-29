@@ -95,7 +95,7 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
     }
 
     public function creative_slider_settings_page() {
-      echo "This is a test page";
+      require( CREATIVE_SLIDER_PATH . 'views/settings-page.php' );
     }
 
   }
