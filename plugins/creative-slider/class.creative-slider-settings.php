@@ -12,7 +12,7 @@ if ( ! class_exists('Creative_Slider_Settings' ) ) {
 
     public function admin_init() {
 
-      register_setting( 'creative_slider_group', 'creative_slider_options' );
+      register_setting( 'creative_slider_group', 'creative_slider_options', array( $this, 'creative_slider_validate' ) );
 
       add_settings_section(
         'creative_slider_main_section',
@@ -130,5 +130,22 @@ if ( ! class_exists('Creative_Slider_Settings' ) ) {
       <?php
     }
 
+    public function creative_slider_validate( $input ) {
+      $new_input = array();
+      foreach ( $input as $key => $value) {
+        switch ($key) {
+          case 'creative_slider_title':
+            if ( empty( $value ) ) {
+              $value = 'Please, type some text';
+            }
+            $new_input[$key] = sanitize_text_field( $value );
+          break;
+          default:
+            $new_input[$key] = sanitize_text_field( $value );
+          break;    
+        }
+      }
+      return $new_input;
+    }
   }
 }
