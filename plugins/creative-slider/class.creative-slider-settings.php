@@ -41,7 +41,10 @@ if ( ! class_exists('Creative_Slider_Settings' ) ) {
         'Slider Title',
         array( $this, 'creative_slider_title_callback' ),
         'creative_slider_page2',
-        'creative_slider_second_section'
+        'creative_slider_second_section',
+        array(
+          'label_for' => 'creative_slider_title'
+        )
       );
 
       add_settings_field(
@@ -49,7 +52,10 @@ if ( ! class_exists('Creative_Slider_Settings' ) ) {
         'Display Bullets',
         array( $this, 'creative_slider_bullets_callback' ),
         'creative_slider_page2',
-        'creative_slider_second_section'
+        'creative_slider_second_section',
+        array(
+          'label_for' => 'creative_slider_bullets'
+        )
       );
 
       add_settings_field(
@@ -57,7 +63,14 @@ if ( ! class_exists('Creative_Slider_Settings' ) ) {
         'Slider Style',
         array( $this, 'creative_slider_style_callback' ),
         'creative_slider_page2',
-        'creative_slider_second_section'
+        'creative_slider_second_section',
+        array(
+          'items' => array(
+            'style-1',
+            'style-2'
+          ),
+          'label_for' => 'creative_slider_style'
+        )
       );
     }
 
@@ -67,7 +80,7 @@ if ( ! class_exists('Creative_Slider_Settings' ) ) {
       <?php
     }
 
-    public function creative_slider_title_callback() {
+    public function creative_slider_title_callback( $args ) {
       ?>
         <input 
         type="text" 
@@ -78,7 +91,7 @@ if ( ! class_exists('Creative_Slider_Settings' ) ) {
       <?php
     }
 
-    public function creative_slider_bullets_callback() {
+    public function creative_slider_bullets_callback( $args ) {
       ?>
       <input 
           type="checkbox" 
@@ -96,15 +109,23 @@ if ( ! class_exists('Creative_Slider_Settings' ) ) {
       <?php
     }
 
-    public function creative_slider_style_callback(){
+    public function creative_slider_style_callback( $args ){
       ?>
         <select 
             id="creative_slider_style" 
             name="creative_slider_options[creative_slider_style]">
-            <option value="style-1" 
-                <?php isset( self::$options['creative_slider_style'] ) ? selected( 'style-1', self::$options['creative_slider_style'], true ) : ''; ?>>Style-1</option>
-            <option value="style-2" 
-                <?php isset( self::$options['creative_slider_style'] ) ? selected( 'style-2', self::$options['creative_slider_style'], true ) : ''; ?>>Style-2</option>
+            <?php 
+              foreach ( $args['items'] as $item ): 
+            ?>
+              <option value="<?php echo esc_attr( $item ); ?>"
+                <?php
+                isset( self::$options['creative_slider'] ) ? selected( $item, self::$options['creative_slider_style'], true ) :
+                ''
+                ?>
+              >
+                <?php echo esc_html( ucfirst( $item ) ); ?>  
+              </option>  
+            <?php endforeach; ?>
         </select>
       <?php
     }
