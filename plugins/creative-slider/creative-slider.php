@@ -98,6 +98,16 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
     }
 
     public function creative_slider_settings_page() {
+      if ( ! current_user_can( 'manage_options' ) ) {
+        return;
+      }
+
+      if ( isset( $_GET['settings-updated'] ) ) {
+        add_settings_error( 'creative_slider_options', 'creative_slider_message', 'Settings Saved', 'success' );
+      }
+      
+      settings_errors( 'creative_slider_options' );
+
       require( CREATIVE_SLIDER_PATH . 'views/settings-page.php' );
     }
 

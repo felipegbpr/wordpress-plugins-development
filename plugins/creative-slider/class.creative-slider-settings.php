@@ -136,6 +136,8 @@ if ( ! class_exists('Creative_Slider_Settings' ) ) {
         switch ($key) {
           case 'creative_slider_title':
             if ( empty( $value ) ) {
+              add_settings_error( 'creative_slider_options', 'creative_slider_message', 'The title field can not be left empty', 
+              'error' );
               $value = 'Please, type some text';
             }
             $new_input[$key] = sanitize_text_field( $value );
