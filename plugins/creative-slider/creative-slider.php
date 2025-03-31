@@ -45,6 +45,9 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
 
       require_once( CREATIVE_SLIDER_PATH . 'class.creative-slider-settings.php' );
       $Creative_Slider_Settings = new Creative_Slider_Settings();
+
+      require_once( CREATIVE_SLIDER_PATH . 'shortcodes/class.creative-slider-shortcode.php' );
+      $Creative_Slider_Shortcode = new Creative_Slider_Shortcode();
     }    
 
     public function define_constants() {

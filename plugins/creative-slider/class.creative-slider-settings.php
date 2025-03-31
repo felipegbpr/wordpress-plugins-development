@@ -1,6 +1,6 @@
 <?php
 
-if ( ! class_exists('Creative_Slider_Settings' ) ) {
+if ( ! class_exists( 'Creative_Slider_Settings' ) ) {
   class Creative_Slider_Settings {
 
     public static $options;
