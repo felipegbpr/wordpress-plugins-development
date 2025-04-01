@@ -1,6 +1,18 @@
 <h3><?php echo ( ! empty ( $content ) ) ? esc_html($content) : esc_html( Creative_Slider_Settings::$options['creative_slider_title'] ); ?></h3>
 <div class="creative-slider flexslider">
     <ul class="slides">
+    <?php 
+
+    $args = array(
+      'post_type' => 'creative-slider',
+      'post_status' => 'publish',
+      'post__in' => $id,
+      'orderby' => $orderby,
+    );
+
+    $my_query = new WP_Query( $args );
+
+    ?>  
         <li>
             <div class="mvs-container">
                 <div class="slider-details-container">
