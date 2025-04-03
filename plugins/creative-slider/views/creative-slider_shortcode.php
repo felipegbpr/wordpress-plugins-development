@@ -20,7 +20,13 @@ esc_attr(Creative_Slider_Settings::$options['creative_slider_style'] ) : 'style-
         $button_url = get_post_meta( get_the_ID(), 'creative_slider_link_url', true );
     ?>  
         <li>
-        <?php the_post_thumbnail( 'full', array( 'class' => 'img-fluid' ) ); ?>
+        <?php
+        if ( has_post_thumbnail() ) {
+					the_post_thumbnail( 'full', array( 'class' => 'img-fluid' ) ); 
+        } else {
+					echo "<img src='" . CREATIVE_SLIDER_URL . "assets/images/default.jpg' class='img-fluid wp-post-image' />";
+				}
+        ?>
             <div class="mvs-container">
                 <div class="slider-details-container">
                     <div class="wrapper">
