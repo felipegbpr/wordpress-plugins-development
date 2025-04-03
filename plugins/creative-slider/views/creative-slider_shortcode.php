@@ -1,5 +1,6 @@
 <h3><?php echo ( ! empty ( $content ) ) ? esc_html($content) : esc_html( Creative_Slider_Settings::$options['creative_slider_title'] ); ?></h3>
-<div class="creative-slider flexslider">
+<div class="creative-slider flexslider <?php echo ( isset( Creative_Slider_Settings::$options['creative_slider_style'] ) ) ? 
+esc_attr(Creative_Slider_Settings::$options['creative_slider_style'] ) : 'style-1'; ?>">
     <ul class="slides">
     <?php 
 
