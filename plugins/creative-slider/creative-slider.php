@@ -37,6 +37,8 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
   class Creative_Slider {
     function __construct() {
       $this->define_constants();
+      
+      $this->load_textdomain();
 
       require_once( CREATIVE_SLIDER_PATH . 'functions/functions.php' ); 
 
@@ -72,6 +74,14 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
 
     public static function uninstall() {
 
+    }
+
+    public function load_textdomain() {
+      load_plugin_textdomain(
+        'creative-slider',
+        false,
+        dirname( plugin_basename( __FILE__ ) ) . '/languages/'
+      );
     }
 
     public function add_menu() {
