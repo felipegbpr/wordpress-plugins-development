@@ -26,9 +26,9 @@ if( ! class_exists( 'Creative_Slider_Shortcode' ) ) {
             ob_start();
             require( CREATIVE_SLIDER_PATH . 'views/creative-slider_shortcode.php' );
             wp_enqueue_script( 'creative-slider-main-jq' );
-            wp_enqueue_script( 'creative-slider-options-js' );
             wp_enqueue_style( 'creative-slider-main-css' );
             wp_enqueue_style( 'creative-slider-style-css' );
+            creative_slider_options();
             return ob_get_clean();
         }
     }

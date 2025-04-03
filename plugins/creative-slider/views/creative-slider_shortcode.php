@@ -24,7 +24,7 @@ esc_attr(Creative_Slider_Settings::$options['creative_slider_style'] ) : 'style-
         if ( has_post_thumbnail() ) {
 					the_post_thumbnail( 'full', array( 'class' => 'img-fluid' ) ); 
         } else {
-					echo "<img src='" . CREATIVE_SLIDER_URL . "assets/images/default.jpg' class='img-fluid wp-post-image' />";
+					echo creative_slider_get_placeholder_image();
 				}
         ?>
             <div class="mvs-container">

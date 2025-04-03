@@ -38,6 +38,8 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
     function __construct() {
       $this->define_constants();
 
+      require_once( CREATIVE_SLIDER_PATH . 'functions/functions.php' ); 
+
       add_action( 'admin_menu', array( $this, 'add_menu' ) );
 
       require_once( CREATIVE_SLIDER_PATH . 'post-types/class.creative-slider-cpt.php' );
@@ -119,8 +121,6 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
 
     public function register_scripts(){
       wp_register_script( 'creative-slider-main-jq', CREATIVE_SLIDER_URL . 'vendor/flexslider/jquery.flexslider-min.js', array( 'jquery' ), 
-      CREATIVE_SLIDER_VERSION, true );
-      wp_register_script( 'creative-slider-options-js', CREATIVE_SLIDER_URL . 'vendor/flexslider/flexslider.js', array( 'jquery' ), 
       CREATIVE_SLIDER_VERSION, true );
       wp_register_style( 'creative-slider-main-css', CREATIVE_SLIDER_URL . 'vendor/flexslider/flexslider.css', array(), 
       CREATIVE_SLIDER_VERSION, 'all' );
