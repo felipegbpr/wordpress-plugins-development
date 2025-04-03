@@ -50,6 +50,7 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
       $Creative_Slider_Shortcode = new Creative_Slider_Shortcode();
 
       add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ), 999 );
+      add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
     }    
 
     public function define_constants() {
@@ -125,6 +126,13 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
       CREATIVE_SLIDER_VERSION, 'all' );
       wp_register_style( 'creative-slider-style-css', CREATIVE_SLIDER_URL . 'assets/css/frontend.css', array(), 
       CREATIVE_SLIDER_VERSION, 'all' );
+    }
+
+    public function register_admin_scripts() {
+      global $typenow;
+      if ( $typenow == 'creative-slider' ) {
+        wp_enqueue_style( 'creative-slider-admin', CREATIVE_SLIDER_URL . 'assets/css/admin.css' );
+      }
     }
 
   }
