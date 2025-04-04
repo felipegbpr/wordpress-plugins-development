@@ -16,21 +16,21 @@ if ( ! class_exists( 'Creative_Slider_Settings' ) ) {
 
       add_settings_section(
         'creative_slider_main_section',
-        'Hows does it work?',
+        __( 'Hows does it work?', 'creative-slider' ),
         null,
         'creative_slider_page1'
       );
 
       add_settings_section(
         'creative_slider_second_section',
-        'Other Plugin Options',
+        __( 'Other Plugin Options', 'creative-slider' ),
         null,
         'creative_slider_page2'
       );
 
       add_settings_field(
         'creative_slider_shortcode',
-        'Shortcode',
+        __( 'Shortcode' , 'creative-slider' ),
         array( $this, 'creative_slider_shortcode_callback' ),
         'creative_slider_page1',
         'creative_slider_main_section'
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Creative_Slider_Settings' ) ) {
 
       add_settings_field(
         'creative_slider_title',
-        'Slider Title',
+        __( 'Slider Title', 'creative-slider' ),
         array( $this, 'creative_slider_title_callback' ),
         'creative_slider_page2',
         'creative_slider_second_section',
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Creative_Slider_Settings' ) ) {
 
       add_settings_field(
         'creative_slider_bullets',
-        'Display Bullets',
+        __( 'Display Bullets', 'creative-slider' ),
         array( $this, 'creative_slider_bullets_callback' ),
         'creative_slider_page2',
         'creative_slider_second_section',
@@ -60,7 +60,7 @@ if ( ! class_exists( 'Creative_Slider_Settings' ) ) {
 
       add_settings_field(
         'creative_slider_style',
-        'Slider Style',
+        __( 'Slider Style', 'creative-slider' ),
         array( $this, 'creative_slider_style_callback' ),
         'creative_slider_page2',
         'creative_slider_second_section',
@@ -76,7 +76,7 @@ if ( ! class_exists( 'Creative_Slider_Settings' ) ) {
 
     public function creative_slider_shortcode_callback() {
       ?>
-      <span>Use the shortcode [creative_slider] to display the slider in any page/post/widget</span>
+      <span><?php _e( 'Use the shortcode [creative_slider] to display the slider in any page/post/widget', 'creative-slider' ); ?></span>
       <?php
     }
 
@@ -104,7 +104,7 @@ if ( ! class_exists( 'Creative_Slider_Settings' ) ) {
             }
           ?>
         />
-        <label for="creative_slider_bullets">Whether to display bullets or not</label>
+        <label for="creative_slider_bullets"><?php _e( 'Whether to display bullets or not', 'creative-slider' ); ?></label>
 
       <?php
     }
@@ -136,9 +136,9 @@ if ( ! class_exists( 'Creative_Slider_Settings' ) ) {
         switch ($key) {
           case 'creative_slider_title':
             if ( empty( $value ) ) {
-              add_settings_error( 'creative_slider_options', 'creative_slider_message', 'The title field can not be left empty', 
-              'error' );
-              $value = 'Please, type some text';
+              add_settings_error( 'creative_slider_options', 'creative_slider_message', __( 'The title field can not be left 
+              empty', 'creative-slider'), 'error' );
+              $value = __( 'Please, type some text', 'creative-slider' );
             }
             $new_input[$key] = sanitize_text_field( $value );
           break;

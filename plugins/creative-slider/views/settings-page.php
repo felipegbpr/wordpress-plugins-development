@@ -5,9 +5,9 @@
   ?>
   <h2 class="nav-tab-wrapper">
     <a href="?page=creative_slider_admin&tab=main_options" class="nav-tab <?php echo $active_tab == 'main_options' ? 'nav-tab-active' 
-    : ''; ?>">Main Options</a>
+    : ''; ?>"><?php _e( 'Main Options', 'creative-slider' ); ?></a>
     <a href="?page=creative_slider_admin&tab=additional_options" class="nav-tab <?php echo $active_tab == 'additional_options' ? 'nav-tab-active' 
-    : ''; ?>">Additional Options</a>
+    : ''; ?>"><?php _e( 'Additional Options', 'creative-slider' ); ?></a>
   </h2>
   <form action="options.php" method="post">
   <?php 
@@ -19,7 +19,7 @@
       do_settings_sections( 'creative_slider_page2' );
     }
   
-    submit_button( 'Save Settings' );
+    submit_button( __( 'Save Settings', 'creative-slider' )  );
   ?>
   </form>
 </div>

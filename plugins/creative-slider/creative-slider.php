@@ -86,7 +86,7 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
 
     public function add_menu() {
       add_menu_page( 
-        'Creative Slider Options',
+        __( 'Creative Slider Options', 'creative-slider' ),
         'Creative Slider',
         'manage_options',
         'creative_slider_admin',
@@ -96,8 +96,8 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
 
       add_submenu_page(
         'creative_slider_admin',
-        'Manage Slides',
-        'Manage Slides',
+        __( 'Manage Slides', 'creative-slider' ),
+        __( 'Manage Slides', 'creative-slider' ),
         'manage_options',
         'edit.php?post_type=creative-slider',
         null,
@@ -106,8 +106,8 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
 
       add_submenu_page(
         'creative_slider_admin',
-        'Add New Slide',
-        'Add New Slide',
+        __( 'Add New Slide', 'creative-slider' ),
+        __( 'Add New Slide', 'creative-slider' ),
         'manage_options',
         'post-new.php?post_type=creative-slider',
         null,
@@ -121,7 +121,7 @@ if ( ! class_exists( 'Creative_Slider' ) ) {
       }
 
       if ( isset( $_GET['settings-updated'] ) ) {
-        add_settings_error( 'creative_slider_options', 'creative_slider_message', 'Settings Saved', 'success' );
+        add_settings_error( 'creative_slider_options', 'creative_slider_message', __( 'Settings Saved', 'creative-slider' ), 'success' );
       }
       
       settings_errors( 'creative_slider_options' );
