@@ -15,11 +15,11 @@ if ( !class_exists( 'Creative_Slider_Post_Type') ){
 					register_post_type(
 							'creative-slider',
 							array(
-									'label' => __( 'Slider', 'creative-slider' ),
-									'description'   => __( 'Sliders', 'creative-slider' ),
+									'label' => esc_html__( 'Slider', 'creative-slider' ),
+									'description'   => esc_html__( 'Sliders', 'creative-slider' ),
 									'labels' => array(
 											'name'  => __( 'Sliders', 'creative-slider' ),
-											'singular_name' => __( 'Slider', 'creative-slider' )
+											'singular_name' => esc_html__( 'Slider', 'creative-slider' )
 									),
 									'public'    => true,
 									'supports'  => array( 'title', 'editor', 'thumbnail' ),
@@ -65,7 +65,7 @@ if ( !class_exists( 'Creative_Slider_Post_Type') ){
 				public function add_meta_boxes(){
 						add_meta_box(
 								'creative_slider_meta_box',
-								__( 'Link Options', 'creative-slider' ),
+								esc_html__( 'Link Options', 'creative-slider' ),
 								array( $this, 'add_inner_meta_boxes' ),
 								'creative-slider',
 								'normal',
@@ -103,7 +103,7 @@ if ( !class_exists( 'Creative_Slider_Post_Type') ){
 								$new_link_url = $_POST['creative_slider_link_url'];
 
 								if ( empty( $new_link_text )) {
-										update_post_meta( $post_id, 'creative_slider_link_text', __( 'Add some text', 'creative-slider' ) );
+										update_post_meta( $post_id, 'creative_slider_link_text', esc_html__( 'Add some text', 'creative-slider' ) );
 								} else {
 										update_post_meta( $post_id, 'creative_slider_link_text', sanitize_text_field( $new_link_text ), $old_link_text );
 								}
