@@ -88,5 +88,5 @@ if( class_exists( 'Bright_Testimonials' ) ){
     register_deactivation_hook( __FILE__, array( 'Bright_Testimonials', 'deactivate'));
     register_uninstall_hook( __FILE__, array( 'Bright_Testimonials', 'uninstall' ) );
 
-    $brt_testimonials = new Bright_Testimonials();
+    $bright_testimonials = new Bright_Testimonials();
 }
