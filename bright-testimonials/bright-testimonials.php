@@ -45,6 +45,8 @@ if( !class_exists( 'Bright_Testimonials' ) ){
             require_once( BRIGHT_TESTIMONIALS_PATH . 'post-types/class.bright-testimonials-cpt.php' );
             $BrightTestimonialsPostType = new Bright_Testimonials_Post_Type();
 
+						require_once( BRIGHT_TESTIMONIALS_PATH . 'widgets/class.bright-testimonials-widget.php' );
+            $BrightTestimonialsWidget = new Bright_Testimonials_Widget();
         }
 
          /**
