@@ -65,7 +65,17 @@ class Bright_Testimonials_Widget extends WP_Widget {
 	}
 
 	public function widget( $args, $instance ) {
+		$default_title = 'Bright Testimonials';
+		$title = ! empty( $instance['title'] ) ? $instance['title'] : $default_title; 
+		$number = ! empty( $instance['number'] ) ? $instance['number'] : 5; 
+		$image = ! empty( $instance['image'] ) ? $instance['image'] : false; 
+		$occupation = ! empty( $instance['occupation'] ) ? $instance['occupation'] : false; 
+		$company = ! empty( $instance['company'] ) ? $instance['company'] : false; 
 
+		echo $args['before_widget'];
+		echo $args['before_title'] . $title . $args['after_title'];
+
+		echo $args['after_widget'];
 	}
 
 	public function update( $new_instance, $old_instance ) {
