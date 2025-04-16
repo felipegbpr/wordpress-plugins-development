@@ -19,6 +19,20 @@ class Bright_Testimonials_Widget extends WP_Widget {
 				);
 			}
 		);
+
+		if ( is_active_widget(false, false, $this->id_base) ) {
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
+		}
+	}
+
+	public function enqueue() {
+		wp_enqueue_style(
+			'bright-testimonials-style-css',
+			BRIGHT_TESTIMONIALS_URL . 'assets/css/frontend.css',
+			array(),
+			BRIGHT_TESTIMONIALS_VERSION,
+			'all'
+		);
 	}
 
 	public function form( $instance ) {
