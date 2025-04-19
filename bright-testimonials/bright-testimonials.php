@@ -47,6 +47,9 @@ if( !class_exists( 'Bright_Testimonials' ) ){
 
 						require_once( BRIGHT_TESTIMONIALS_PATH . 'widgets/class.bright-testimonials-widget.php' );
             $BrightTestimonialsWidget = new Bright_Testimonials_Widget();
+
+						add_filter( 'archive_template', array( $this, 'load_custom_archive_template' ) );
+						add_filter( 'single_template', array( $this, 'load_custom_single_template' ) );
         }
 
          /**
@@ -58,6 +61,24 @@ if( !class_exists( 'Bright_Testimonials' ) ){
             define ( 'BRIGHT_TESTIMONIALS_URL', plugin_dir_url( __FILE__ ) );
             define ( 'BRIGHT_TESTIMONIALS_VERSION', '1.0.0' );     
         }
+
+				public function load_custom_archive_template( $tpl ) {
+					if ( current_theme_supports( 'bright-testimonials' ) ) {
+						if ( is_post_type_archive( 'bright-testimonials' ) ) {
+							$tpl = BRIGHT_TESTIMONIALS_PATH . 'views/templates/archive-bright-testimonials.php';
+						}
+					}
+					return $tpl;
+				} 
+
+				public function load_custom_single_template( $tpl ) {
+					if ( current_theme_supports( 'bright-testimonials' ) ) {
+						if ( is_singular( 'bright-testimonials' ) ) {
+							$tpl = BRIGHT_TESTIMONIALS_PATH . 'views/templates/single-bright-testimonials.php';
+						}
+					}
+					return $tpl;
+				} 
 
         /**
          * Activate the plugin
