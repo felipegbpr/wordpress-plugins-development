@@ -39,6 +39,9 @@ if( !class_exists( 'Bright_Testimonials' ) ){
 
         public function __construct() {
 
+						// $this->load_textdomain();
+						add_action( 'init', array( $this, 'load_textdomain' ) );
+
             // Define constants used througout the plugin
             $this->define_constants();     
             
@@ -47,6 +50,8 @@ if( !class_exists( 'Bright_Testimonials' ) ){
 
 						require_once( BRIGHT_TESTIMONIALS_PATH . 'widgets/class.bright-testimonials-widget.php' );
             $BrightTestimonialsWidget = new Bright_Testimonials_Widget();
+
+						
 
 						add_filter( 'archive_template', array( $this, 'load_custom_archive_template' ) );
 						add_filter( 'single_template', array( $this, 'load_custom_single_template' ) );
@@ -89,6 +94,15 @@ if( !class_exists( 'Bright_Testimonials' ) ){
 					}
 					return $file;
 				}
+
+				public function load_textdomain(){
+					load_plugin_textdomain(
+							'bright-testimonials',
+							false,
+							dirname( plugin_basename( __FILE__ ) ) . '/languages/'
+					);
+				}
+
 
         /**
          * Activate the plugin
