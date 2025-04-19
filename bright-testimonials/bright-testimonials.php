@@ -60,12 +60,13 @@ if( !class_exists( 'Bright_Testimonials' ) ){
             define ( 'BRIGHT_TESTIMONIALS_PATH', plugin_dir_path( __FILE__ ) );
             define ( 'BRIGHT_TESTIMONIALS_URL', plugin_dir_url( __FILE__ ) );
             define ( 'BRIGHT_TESTIMONIALS_VERSION', '1.0.0' );     
+            define ( 'BRIGHT_TESTIMONIALS_OVERRIDE_PATH_DIR', get_stylesheet_directory() . '/bright-testimonials/' );     
         }
 
 				public function load_custom_archive_template( $tpl ) {
 					if ( current_theme_supports( 'bright-testimonials' ) ) {
 						if ( is_post_type_archive( 'bright-testimonials' ) ) {
-							$tpl = BRIGHT_TESTIMONIALS_PATH . 'views/templates/archive-bright-testimonials.php';
+							$tpl = $this->get_template_part_location( 'archive-bright-testimonials.php' );
 						}
 					}
 					return $tpl;
@@ -74,11 +75,20 @@ if( !class_exists( 'Bright_Testimonials' ) ){
 				public function load_custom_single_template( $tpl ) {
 					if ( current_theme_supports( 'bright-testimonials' ) ) {
 						if ( is_singular( 'bright-testimonials' ) ) {
-							$tpl = BRIGHT_TESTIMONIALS_PATH . 'views/templates/single-bright-testimonials.php';
+							$tpl = $this->get_template_part_location( 'single-bright-testimonials.php' );
 						}
 					}
 					return $tpl;
 				} 
+
+				public function get_template_part_location( $file ) {
+					if ( file_exists( BRIGHT_TESTIMONIALS_OVERRIDE_PATH_DIR . $file ) ) {
+						$file = BRIGHT_TESTIMONIALS_OVERRIDE_PATH_DIR . $file;
+					} else {
+						$file = BRIGHT_TESTIMONIALS_PATH . 'views/templates/' . $file;
+					}
+					return $file;
+				}
 
         /**
          * Activate the plugin
