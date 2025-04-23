@@ -5,6 +5,8 @@ if ( ! class_exists( 'Inspire_Translations_Post_Type' ) ) {
 		public function __construct() {
 			add_action( 'init', array( $this, 'create_post_type') );
 			add_action( 'init', array( $this, 'create_taxonomy') );
+			add_action( 'init', array( $this, 'register_metadata_table') );
+			add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		}
 
 		public function create_post_type() {
@@ -52,6 +54,26 @@ if ( ! class_exists( 'Inspire_Translations_Post_Type' ) ) {
 					)
 			);
 		}
-	}
 
+		public function register_metadata_table() {
+			global $wpdb;
+			$wpdb->translationmeta = $wpdb->prefix . 'translationmeta';
+		} 
+
+		public function add_meta_boxes() {
+      add_meta_box(
+        'ipt_testimonials_meta_box',
+        esc_html__( 'Translations Options', 'inspire-translations' ),
+        array( $this, 'add_inner_meta_boxes' ),
+        'inspire-translations',
+        'normal',
+        'high'
+      );
+    }
+
+		public function add_inner_meta_boxes( $post ) {
+      require_once( INSPIRE_TRANSLATIONS_PATH  . 'views/inspire-translations_metabox.php' );
+    }
+
+	}
 }
