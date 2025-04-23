@@ -82,6 +82,38 @@ if (!class_exists('Inspire_Translations')) {
 					$ipt_db_version = '1.0';
 					add_option( 'ipt_translation_db_version', $ipt_db_version );
 			}
+
+
+			if ( $wpdb->get_row( "SELECT post_name FROM {$wpdb->prefix}posts WHERE post_name = 'submit-translation'" ) === null ) {
+
+				$current_user = wp_get_current_user();
+
+				$page = array(
+					'post_title' => __( 'Submit Translation', 'inspire-translations' ),
+					'post_name' => 'submit-translation',
+					'post_status'		=> 'publish',
+					'post_author'		=> $current_user->ID,
+					'post_type' => 'page',
+					'post_content' => '<!-- wp:shortcode -->[ipt_translations]<!-- /wp:shortcode -->'
+				);
+				wp_insert_post( $page );
+			}		
+
+			if ( $wpdb->get_row( "SELECT post_name FROM {$wpdb->prefix}posts WHERE post_name = 'edit-translation'" ) === null ) {
+
+				$current_user = wp_get_current_user();
+
+				$page = array(
+					'post_title' => __( 'Edit Translation', 'inspire-translations' ),
+					'post_name' => 'edit-translation',
+					'post_status'		=> 'publish',
+					'post_author'		=> $current_user->ID,
+					'post_type' => 'page',
+					'post_content' => '<!-- wp:shortcode -->[ipt_translations_edit]<!-- /wp:shortcode -->'
+				);
+				wp_insert_post( $page );
+			}		
+
 		}
 
 		/**
@@ -100,12 +132,12 @@ if (!class_exists('Inspire_Translations')) {
 }
 
 // Plugin Instantiation
-if (class_exists('Inspire_Translations')) {
+if (class_exists( 'Inspire_Translations' ) ) {
 
 	// Installation and uninstallation hooks
-	register_activation_hook(__FILE__, array('Inspire_Translations', 'activate'));
-	register_deactivation_hook(__FILE__, array('Inspire_Translations', 'deactivate'));
-	register_uninstall_hook(__FILE__, array('Inspire_Translations', 'uninstall'));
+	register_activation_hook(__FILE__, array( 'Inspire_Translations', 'activate' ) );
+	register_deactivation_hook(__FILE__, array( 'Inspire_Translations', 'deactivate' ) );
+	register_uninstall_hook(__FILE__, array( 'Inspire_Translations', 'uninstall' ) );
 
 	// Instatiate the plugin class
 	$inspire_translations = new Inspire_Translations();
