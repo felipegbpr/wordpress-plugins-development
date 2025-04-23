@@ -13,18 +13,18 @@ $results = $wpdb->get_results( $query, ARRAY_A );
     <input type="hidden" name="ipt_translations_nonce" value="<?php echo wp_create_nonce( 'ipt_translations_nonce' ); ?>">
     <tr>
         <th>
-            <label for="ipt_translations_transliteration"><?php esc_html_e( 'Has transliteration?', 'mv-translations' ); ?></label>
+            <label for="ipt_translations_transliteration"><?php esc_html_e( 'Has transliteration?', 'inspire-translations' ); ?></label>
         </th>
         <td>
             <select name="ipt_translations_transliteration" id="ipt_translations_transliteration">
-                <option value="Yes" <?php if ( isset( $results[0]['meta_value'] ) ) selected( $results[0]['meta_value'], 'Yes' ); ?>><?php esc_html_e( 'Yes', 'mv-translations' )?></option>';
-                <option value="No"  <?php if ( isset( $results[0]['meta_value'] ) ) selected( $results[0]['meta_value'], 'No' ); ?>><?php esc_html_e( 'No', 'mv-translations' )?></option>';
+                <option value="Yes" <?php if( isset( $results[0]['meta_value'] ) ) selected( $results[0]['meta_value'], 'Yes' ); ?>><?php esc_html_e( 'Yes', 'inspire-translations' )?></option>';
+                <option value="No" <?php if( isset( $results[0]['meta_value'] ) ) selected( $results[0]['meta_value'], 'No' ); ?>><?php esc_html_e( 'No', 'inspire-translations' )?></option>';
             </select>            
         </td>
     </tr>
     <tr>
         <th>
-            <label for="ipt_translations_video_url"><?php esc_html_e( 'Video URL', 'mv-translations' ); ?></label>
+            <label for="ipt_translations_video_url"><?php esc_html_e( 'Video URL', 'inspire-translations' ); ?></label>
         </th>
         <td>
             <input 

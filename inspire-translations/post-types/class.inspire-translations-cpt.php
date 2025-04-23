@@ -7,6 +7,8 @@ if ( ! class_exists( 'Inspire_Translations_Post_Type' ) ) {
 			add_action( 'init', array( $this, 'create_taxonomy') );
 			add_action( 'init', array( $this, 'register_metadata_table') );
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+
+			add_action( 'wp_insert_post', array( $this, 'save_post' ), 10, 2 );
 		}
 
 		public function create_post_type() {
@@ -75,5 +77,68 @@ if ( ! class_exists( 'Inspire_Translations_Post_Type' ) ) {
       require_once( INSPIRE_TRANSLATIONS_PATH  . 'views/inspire-translations_metabox.php' );
     }
 
+		public function save_post($post_id, $post) {
+			if ( isset( $_POST['ipt_translations_nonce'] ) ) {
+				if ( ! wp_verify_nonce( $_POST['ipt_translations_nonce'], 'ipt_translations_nonce') ) {
+					return;
+				}
+			}
+
+			if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+				return;
+			}
+
+			if ( isset( $_POST['post_type'] ) && $_POST['post_type'] === 'inspire-translations' ) {
+				if ( ! current_user_can( 'edit_page', $post_id ) ) {
+					return;
+				} elseif ( ! current_user_can( 'edit_post', $post_id ) ) {
+					return;
+				}
+			}
+
+			if ( isset( $_POST['action'] ) && $_POST['action'] == 'editpost' ){
+
+				$tansliteration = sanitize_text_field( $_POST['ipt_translations_transliteration'] );		
+				$video = esc_url_raw( $_POST['ipt_translations_video_url'] );		
+
+				global $wpdb;
+
+				if ( get_post_type( $post ) == 'inspire-translations' &&
+					$post->post_status != 'trash' &&   
+					$post->post_status != 'auto-draft' &&   
+					$post->post_status != 'draft' &&   
+					$wpdb->get_var( 
+						$wpdb->prepare( 
+							"SELECT translation_id
+							FROM $wpdb->translationmeta
+							WHERE translation_id = %d",
+							$post_id
+						 )) == null
+				) {
+					$wpdb->insert(
+						$wpdb->translationmeta,
+						array(
+							'translation_id' => $post_id,
+							'meta_key' => 'ipt_translations_transliteration',
+							'meta_value' => $tansliteration
+						),
+						array(
+							'%d', '%s', '%s'
+						)
+					);
+					$wpdb->insert(
+						$wpdb->translationmeta,
+						array(
+							'translation_id' => $post_id,
+							'meta_key' => 'ipt_translations_video_url',
+							'meta_value' => $video
+						),
+						array(
+							'%d', '%s', '%s'
+						)
+					);
+				}
+			}
+		} 
 	}
 }
