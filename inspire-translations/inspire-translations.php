@@ -42,6 +42,10 @@ if (!class_exists('Inspire_Translations')) {
 		{
 
 			$this->define_constants();
+
+			require_once( INSPIRE_TRANSLATIONS_PATH . "post-types/class.inspire-translations-cpt.php" );
+
+			$InspireTranslationsPostType = new Inspire_Translations_Post_Type();
 		}
 
 		public function define_constants()
@@ -122,6 +126,7 @@ if (!class_exists('Inspire_Translations')) {
 		public static function deactivate()
 		{
 			flush_rewrite_rules();
+			unregister_post_type( 'inspire-translations' );
 		}
 
 		/**
