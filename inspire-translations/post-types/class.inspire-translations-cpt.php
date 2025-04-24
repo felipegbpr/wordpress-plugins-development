@@ -176,12 +176,12 @@ if ( ! class_exists( 'Inspire_Translations_Post_Type' ) ) {
 					return;
 			}
 			if( get_post_type( $post_id ) == 'inspire-translations' ){
-					global $wpdb;
-					$wpdb->delete(
-							$wpdb->translationmeta,
-							array( 'translation_id' => $post_id ),
-							array( '%d' )
-					);
+				global $wpdb;
+				$wpdb->delete(
+						$wpdb->translationmeta,
+						array( 'translation_id' => $post_id ),
+						array( '%d' )
+				);
 			}
 		}
 	}
