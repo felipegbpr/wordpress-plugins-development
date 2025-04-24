@@ -98,45 +98,74 @@ if ( ! class_exists( 'Inspire_Translations_Post_Type' ) ) {
 
 			if ( isset( $_POST['action'] ) && $_POST['action'] == 'editpost' ){
 
-				$tansliteration = sanitize_text_field( $_POST['ipt_translations_transliteration'] );		
+				$transliteration = sanitize_text_field( $_POST['ipt_translations_transliteration'] );		
 				$video = esc_url_raw( $_POST['ipt_translations_video_url'] );		
 
 				global $wpdb;
 
-				if ( get_post_type( $post ) == 'inspire-translations' &&
-					$post->post_status != 'trash' &&   
-					$post->post_status != 'auto-draft' &&   
-					$post->post_status != 'draft' &&   
-					$wpdb->get_var( 
-						$wpdb->prepare( 
-							"SELECT translation_id
-							FROM $wpdb->translationmeta
-							WHERE translation_id = %d",
-							$post_id
-						 )) == null
-				) {
-					$wpdb->insert(
-						$wpdb->translationmeta,
-						array(
-							'translation_id' => $post_id,
-							'meta_key' => 'ipt_translations_transliteration',
-							'meta_value' => $tansliteration
-						),
-						array(
-							'%d', '%s', '%s'
-						)
-					);
-					$wpdb->insert(
-						$wpdb->translationmeta,
-						array(
-							'translation_id' => $post_id,
-							'meta_key' => 'ipt_translations_video_url',
-							'meta_value' => $video
-						),
-						array(
-							'%d', '%s', '%s'
-						)
-					);
+				if ($_POST['ipt_translations_action'] == 'save') {
+					if ( get_post_type( $post ) == 'inspire-translations' &&
+						$post->post_status != 'trash' &&   
+						$post->post_status != 'auto-draft' &&   
+						$post->post_status != 'draft' &&   
+						$wpdb->get_var( 
+							$wpdb->prepare( 
+								"SELECT translation_id
+								FROM $wpdb->translationmeta
+								WHERE translation_id = %d",
+								$post_id
+							)) == null
+					){
+						$wpdb->insert(
+							$wpdb->translationmeta,
+							array(
+								'translation_id' => $post_id,
+								'meta_key' => 'ipt_translations_transliteration',
+								'meta_value' => $transliteration
+							),
+							array(
+								'%d', '%s', '%s'
+							)
+						);
+						$wpdb->insert(
+							$wpdb->translationmeta,
+							array(
+								'translation_id' => $post_id,
+								'meta_key' => 'ipt_translations_video_url',
+								'meta_value' => $video
+							),
+							array(
+								'%d', '%s', '%s'
+							)
+						);
+					}
+				} else {
+					if( get_post_type( $post ) == 'inspire-translations' ) {
+						$wpdb->update(
+							$wpdb->translationmeta,
+							array(
+									'meta_value'    => $transliteration
+							),
+							array(
+									'translation_id'    => $post_id,
+									'meta_key'  => 'ipt_translations_transliteration',   
+							),
+							array( '%s' ),
+							array( '%d', '%s' )
+						);
+						$wpdb->update(
+							$wpdb->translationmeta,
+							array(
+									'meta_value'    => $video
+							),
+							array(
+									'translation_id'    => $post_id,
+									'meta_key'  => 'ipt_translations_video_url',   
+							),
+							array( '%s' ),
+							array( '%d', '%s' )
+						);
+					}
 				}
 			}
 		} 
