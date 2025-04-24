@@ -9,6 +9,7 @@ if ( ! class_exists( 'Inspire_Translations_Post_Type' ) ) {
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 
 			add_action( 'wp_insert_post', array( $this, 'save_post' ), 10, 2 );
+			add_action( 'delete_post', array( $this, 'delete_post' ) );
 		}
 
 		public function create_post_type() {
@@ -169,5 +170,19 @@ if ( ! class_exists( 'Inspire_Translations_Post_Type' ) ) {
 				}
 			}
 		} 
+
+		public function delete_post( $post_id ){
+			if( ! current_user_can( 'delete_posts' ) ){
+					return;
+			}
+			if( get_post_type( $post_id ) == 'inspire-translations' ){
+					global $wpdb;
+					$wpdb->delete(
+							$wpdb->translationmeta,
+							array( 'translation_id' => $post_id ),
+							array( '%d' )
+					);
+			}
+		}
 	}
 }
