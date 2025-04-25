@@ -78,7 +78,7 @@ if ( ! class_exists( 'Inspire_Translations_Post_Type' ) ) {
       require_once( INSPIRE_TRANSLATIONS_PATH  . 'views/inspire-translations_metabox.php' );
     }
 
-		public function save_post($post_id, $post) {
+		public static function save_post($post_id, $post) {
 			if ( isset( $_POST['ipt_translations_nonce'] ) ) {
 				if ( ! wp_verify_nonce( $_POST['ipt_translations_nonce'], 'ipt_translations_nonce') ) {
 					return;

@@ -1,3 +1,28 @@
+<?php
+if( isset( $_POST['submitted'])){
+    $title              = $_POST['ipt_translations_title'];
+    $content            = $_POST['ipt_translations_content'];
+    $singer             = $_POST['ipt_translations_singer'];
+    $transliteration    = $_POST['ipt_translations_transliteration'];
+    $video              = $_POST['ipt_translations_video_url'];
+
+		$post_info = array(
+			'post_type' => 'inspire-translations',
+			'post_title'  => $title,
+			'post_content' => $content,
+			'tax_input'  => array(
+				'singers'    => $singer
+			),
+			'post_status'  => 'pending'
+		);
+
+		$post_id = wp_insert_post( $post_info );
+
+		global $post;
+		Inspire_Translations_Post_Type::save_post( $post_id, $post );
+}
+?>		
+
 <div class="inspire-translations">
 	<form action="" method="POST" id="translations-form">
 		<h2><?php esc_html_e( 'Submit new translation' , 'inspire-translations' ); ?></h2>
@@ -9,7 +34,7 @@
 		<input type="text" name="ipt_translations_singer" id="ipt_translations_singer" value="" required />
 
 		<br />
-		<?php wp_editor( '', 'ipt_translations', array( 'wpautop' => true, 'media_buttons' => false ) ); ?>	
+		<?php wp_editor( '', 'ipt_translations_content', array( 'wpautop' => true, 'media_buttons' => false ) ); ?>	
 		</br />
 		
 		<fieldset id="additional-fields">
