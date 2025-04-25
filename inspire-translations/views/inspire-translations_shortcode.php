@@ -1,4 +1,14 @@
 <?php
+
+if ( isset( $_POST['ipt_translations_nonce'] ) ) {
+	if ( ! wp_verify_nonce( $_POST['ipt_translations_nonce'], 'ipt_translations_nonce') ) {
+		return;
+	}
+}
+
+$errors = array();
+$hasError = false;
+
 if( isset( $_POST['submitted'])){
     $title              = $_POST['ipt_translations_title'];
     $content            = $_POST['ipt_translations_content'];
@@ -6,32 +16,62 @@ if( isset( $_POST['submitted'])){
     $transliteration    = $_POST['ipt_translations_transliteration'];
     $video              = $_POST['ipt_translations_video_url'];
 
-		$post_info = array(
-			'post_type' => 'inspire-translations',
-			'post_title'  => $title,
-			'post_content' => $content,
-			'tax_input'  => array(
-				'singers'    => $singer
-			),
-			'post_status'  => 'pending'
-		);
+		if ( trim( $title ) === '' ) {
+			$errors[] = esc_html__( 'Please, enter a title', 'inspire-translations' );
+			$hasError = true;
+		}
 
-		$post_id = wp_insert_post( $post_info );
+		if ( trim( $content ) === '' ) {
+			$errors[] = esc_html__( 'Please, enter a content', 'inspire-translations' );
+			$hasError = true;
+		}
 
-		global $post;
-		Inspire_Translations_Post_Type::save_post( $post_id, $post );
+		if ( trim( $singer ) === '' ) {
+			$errors[] = esc_html__( 'Please, enter a singer', 'inspire-translations' );
+			$hasError = true;
+		}
+
+		if ( $hasError === false ) {
+			$post_info = array(
+				'post_type' => 'inspire-translations',
+				'post_title'  => sanitize_text_field( $title ),
+				'post_content' => wp_kses_post( $content ),
+				'tax_input'  => array(
+					'singers'    => sanitize_text_field( $singer )
+				),
+				'post_status'  => 'pending'
+			);
+	
+			$post_id = wp_insert_post( $post_info );
+	
+			global $post;
+			Inspire_Translations_Post_Type::save_post( $post_id, $post );
+		}
+
 }
 ?>		
 
 <div class="inspire-translations">
 	<form action="" method="POST" id="translations-form">
 		<h2><?php esc_html_e( 'Submit new translation' , 'inspire-translations' ); ?></h2>
+
+		<?php 
+			if ( $errors != '' ) {
+				foreach ($errors as $error) {
+					?>
+						<span class="error">
+							<?php echo $error; ?>
+						</span>
+					<?php	
+				}
+			}
+		?>
 		
 		<label for="ipt_translations_title"><?php esc_html_e( 'Title', 'inspire-translations' ); ?> *</label>
-		<input type="text" name="ipt_translations_title" id="ipt_translations_title" value="" required />
+		<input type="text" name="ipt_translations_title" id="ipt_translations_title" value="" />
 		<br />
 		<label for="ipt_translations_singer"><?php esc_html_e( 'Singer', 'inspire-translations' ); ?> *</label>
-		<input type="text" name="ipt_translations_singer" id="ipt_translations_singer" value="" required />
+		<input type="text" name="ipt_translations_singer" id="ipt_translations_singer" value="" />
 
 		<br />
 		<?php wp_editor( '', 'ipt_translations_content', array( 'wpautop' => true, 'media_buttons' => false ) ); ?>	
