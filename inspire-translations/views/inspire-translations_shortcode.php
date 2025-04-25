@@ -1,5 +1,10 @@
 <?php
 
+if ( ! is_user_logged_in() ) {
+	iptt_register_user();
+	return;
+}
+
 if ( isset( $_POST['ipt_translations_nonce'] ) ) {
 	if ( ! wp_verify_nonce( $_POST['ipt_translations_nonce'], 'ipt_translations_nonce') ) {
 		return;
