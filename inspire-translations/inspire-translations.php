@@ -46,6 +46,8 @@ if( !class_exists( 'Inspire_Translations' )){
       
 			require_once( INSPIRE_TRANSLATIONS_PATH . "shortcodes/class.inspire-translations-shortcode.php" );
 			$InspireTranslationsShortcode = new Inspire_Translations_Shortcode();
+
+			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ), 999 );
 		}
 
 		public function define_constants(){
@@ -131,6 +133,13 @@ if( !class_exists( 'Inspire_Translations' )){
         public static function uninstall(){
 
         }       
+
+				public function register_scripts() {
+					wp_register_script( 'custom_js', INSPIRE_TRANSLATIONS_URL . 'assets/jquery.custom.js', array( 'jquery' ), 
+					INSPIRE_TRANSLATIONS_VERSION, true );
+					wp_register_script( 'validate_js', INSPIRE_TRANSLATIONS_URL . 'assets/jquery.validate.min.js', array( 'jquery' ), 
+					INSPIRE_TRANSLATIONS_VERSION, true );
+				}
 
 	}
 }

@@ -68,10 +68,10 @@ if( isset( $_POST['submitted'])){
 		?>
 		
 		<label for="ipt_translations_title"><?php esc_html_e( 'Title', 'inspire-translations' ); ?> *</label>
-		<input type="text" name="ipt_translations_title" id="ipt_translations_title" value="" />
+		<input type="text" name="ipt_translations_title" id="ipt_translations_title" value="" required />
 		<br />
 		<label for="ipt_translations_singer"><?php esc_html_e( 'Singer', 'inspire-translations' ); ?> *</label>
-		<input type="text" name="ipt_translations_singer" id="ipt_translations_singer" value="" />
+		<input type="text" name="ipt_translations_singer" id="ipt_translations_singer" value="" required />
 
 		<br />
 		<?php wp_editor( '', 'ipt_translations_content', array( 'wpautop' => true, 'media_buttons' => false ) ); ?>	
