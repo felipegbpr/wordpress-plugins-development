@@ -56,12 +56,12 @@ function iptt_register_user() {
 
 		if ( count( $reg_errors->get_error_messages() ) < 1 ) {
 			$user_data = array(
-				'user_login'      => $username,
-				'first_name'      => $firstname,
-				'last_name'      => $lastname,
-				'user_email'      => $useremail,
-				'user_pass'      => $password,
-				'role'      => 'contributor',
+				'user_login'    => $username,
+				'first_name'    => $firstname,
+				'last_name'     => $lastname,
+				'user_email'    => $useremail,
+				'user_pass'     => $password,
+				'role'          => 'author',
 			);
 			$user = wp_insert_user( $user_data );
 	

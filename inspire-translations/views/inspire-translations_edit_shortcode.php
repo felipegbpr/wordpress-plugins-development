@@ -70,12 +70,13 @@ $q = $wpdb->prepare(
 );
 
 $results = $wpdb->get_results( $q, ARRAY_A );
+if ( current_user_can( 'edit_post', $_GET['post'] ) ):
 ?>		
 
 <div class="inspire-translations">
 
 	<form action="" method="POST" id="translations-form">
-		<h2><?php esc_html_e( 'Submit new translation' , 'inspire-translations' ); ?></h2>
+		<h2><?php esc_html_e( 'Edit translation' , 'inspire-translations' ); ?></h2>
 
 		<?php 
 			if ( $errors != '' ) {
@@ -91,31 +92,27 @@ $results = $wpdb->get_results( $q, ARRAY_A );
 		
 		<label for="ipt_translations_title"><?php esc_html_e( 'Title', 'inspire-translations' ); ?> *</label>
 		<input type="text" name="ipt_translations_title" id="ipt_translations_title" 
-			value="<?php if ( isset( $title ) ) echo $title; ?>" required />
+			value="<?php echo esc_html( $results[0]['post_title'] ); ?>" required />
 		<br />
 		<label for="ipt_translations_singer"><?php esc_html_e( 'Singer', 'inspire-translations' ); ?> *</label>
 		<input type="text" name="ipt_translations_singer" id="ipt_translations_singer" 
-			value="<?php if ( isset( $singer ) ) echo $singer; ?>" required />
+			value="<?php echo strip_tags( get_the_term_list( $_GET['post'], 'singers', '', ', ' ) ); ?>" required />
 
 		<br />
 		<?php 
-			if ( isset( $content ) ) {
-				wp_editor( $content, 'ipt_translations_content', array( 'wpautop' => true, 'media_buttons' => false ) ); 
-			} else {
-				wp_editor( '', 'ipt_translations_content', array( 'wpautop' => true, 'media_buttons' => false ) ); 
-			}
+				wp_editor( $results[0]['post_content'], 'ipt_translations_content', array( 'wpautop' => true, 'media_buttons' => false ) ); 
 		?> 	
 		</br />
 		
 		<fieldset id="additional-fields">
 			<label for="ipt_translations_transliteration"><?php esc_html_e( 'Has transliteration?', 'inspire-translations' ); ?></label>
 			<select name="ipt_translations_transliteration" id="ipt_translations_transliteration">
-				<option value="Yes" <?php if ( isset( $transliteration ) ) selected( $transliteration, "Yes" ); ?>><?php esc_html_e( 'Yes', 'inspire-translations' ); ?></option>
-				<option value="No <?php if ( isset( $transliteration ) ) selected( $transliteration, "No" ); ?>"><?php esc_html_e( 'No', 'inspire-translations' ); ?></option>
+				<option value="Yes" <?php  selected( $results[0]['meta_value'], "Yes" ); ?>><?php esc_html_e( 'Yes', 'inspire-translations' ); ?></option>
+				<option value="No <?php selected($results[0]['meta_value'], "No" ); ?>"><?php esc_html_e( 'No', 'inspire-translations' ); ?></option>
 			</select>
 			<label for="ipt_translations_video_url"><?php esc_html_e( 'Video URL', 'inspire-translations' ); ?></label>
 			<input type="url" name="ipt_translations_video_url" id="ipt_translations_video_url" 
-				value="<?php if ( isset( $video ) ) echo $video; ?>" />
+				value="<?php echo $results[1]['meta_value']; ?>" />
 		</fieldset>
 		<br />
 		<input type="hidden" name="ipt_translations_action" value="update">
@@ -124,4 +121,16 @@ $results = $wpdb->get_results( $q, ARRAY_A );
 		<input type="hidden" name="submitted" id="submitted" value="true" />
 		<input type="submit" name="submit_form" value="<?php esc_attr_e( 'Submit', 'inspire-translations' ); ?>" />
 	</form>
+	<br>
+	<a 
+		href="<?php echo esc_url( home_url( '/submit-translation' ) ); ?>"
+	>
+		<?php esc_html_e( 'Back to translations list', 'inspire-translations' ); ?>
+	</a>
 </div>
+<?php endif; ?>
+<script>
+	if ( window.history.replaceState ) {
+		window.history.replaceState( null, null, window.location.href );
+	}
+</script>
