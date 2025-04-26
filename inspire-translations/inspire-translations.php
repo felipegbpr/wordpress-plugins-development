@@ -49,6 +49,9 @@ if( !class_exists( 'Inspire_Translations' )){
 			require_once( INSPIRE_TRANSLATIONS_PATH . "shortcodes/class.inspire-translations-shortcode.php" );
 			$InspireTranslationsShortcode = new Inspire_Translations_Shortcode();
 
+			require_once( INSPIRE_TRANSLATIONS_PATH . "shortcodes/class.inspire-translations-edit-shortcode.php" );
+			$InspireTranslationsEditShortcode = new Inspire_Translations_Edit_Shortcode();
+
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ), 999 );
 		}
 
