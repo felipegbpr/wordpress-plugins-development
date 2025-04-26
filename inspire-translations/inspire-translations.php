@@ -53,6 +53,8 @@ if( !class_exists( 'Inspire_Translations' )){
 			$InspireTranslationsEditShortcode = new Inspire_Translations_Edit_Shortcode();
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ), 999 );
+
+			add_filter( 'single_template', array( $this, 'load_custom_single_template' ) );
 		}
 
 		public function define_constants(){
@@ -62,90 +64,96 @@ if( !class_exists( 'Inspire_Translations' )){
 			define ( 'INSPIRE_TRANSLATIONS_VERSION', '1.0.0' );
 		}
 
-        /**
-         * Activate the plugin
-         */
-        public static function activate(){
-            update_option('rewrite_rules', '' );
+		/**
+		 * Activate the plugin
+		 */
+		public static function activate(){
+				update_option('rewrite_rules', '' );
 
-            global $wpdb;
+				global $wpdb;
 
-            $table_name = $wpdb->prefix . "translationmeta";
+				$table_name = $wpdb->prefix . "translationmeta";
 
-            $iptt_db_version = get_option( 'ipt_translation_db_version' ) ;
+				$iptt_db_version = get_option( 'ipt_translation_db_version' ) ;
 
-            if( empty( $iptt_db_version ) ){
-                $query = "
-                    CREATE TABLE $table_name (
-                        meta_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-                        translation_id bigint(20) NOT NULL DEFAULT '0',
-                        meta_key varchar(255) DEFAULT NULL,
-                        meta_value longtext,
-                        PRIMARY KEY  (meta_id),
-                        KEY translation_id (translation_id),
-                        KEY meta_key (meta_key))
-                        ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-                
-                require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-                dbDelta( $query );
+				if( empty( $iptt_db_version ) ){
+						$query = "
+								CREATE TABLE $table_name (
+										meta_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+										translation_id bigint(20) NOT NULL DEFAULT '0',
+										meta_key varchar(255) DEFAULT NULL,
+										meta_value longtext,
+										PRIMARY KEY  (meta_id),
+										KEY translation_id (translation_id),
+										KEY meta_key (meta_key))
+										ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+						
+						require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+						dbDelta( $query );
 
-                $iptt_db_version = '1.0';
-                add_option( 'ipt_translation_db_version', $iptt_db_version );
-            }
-
-            if( $wpdb->get_row( "SELECT post_name FROM {$wpdb->prefix}posts WHERE post_name = 'submit-translation'" ) === null ){
-                
-                $current_user = wp_get_current_user();
-
-                $page = array(
-                    'post_title'    => __('Submit Translation', 'inspire-translations' ),
-                    'post_name' => 'submit-translation',
-                    'post_status'   => 'publish',
-                    'post_author'   => $current_user->ID,
-                    'post_type' => 'page',
-                    'post_content'  => '<!-- wp:shortcode -->[ipt_translations]<!-- /wp:shortcode -->'
-                );
-                wp_insert_post( $page );
-            }
-
-            if( $wpdb->get_row( "SELECT post_name FROM {$wpdb->prefix}posts WHERE post_name = 'edit-translation'" ) === null ){
-                
-                $current_user = wp_get_current_user();
-
-                $page = array(
-                    'post_title'    => __('Edit Translation', 'inspire-translations' ),
-                    'post_name' => 'edit-translation',
-                    'post_status'   => 'publish',
-                    'post_author'   => $current_user->ID,
-                    'post_type' => 'page',
-                    'post_content'  => '<!-- wp:shortcode -->[ipt_translations_edit]<!-- /wp:shortcode -->'
-                );
-                wp_insert_post( $page );
-            }
-        }
-
-        /**
-         * Deactivate the plugin
-         */
-        public static function deactivate(){
-            flush_rewrite_rules();
-            unregister_post_type( 'inspire-translations' );
-        }        
-
-        /**
-         * Uninstall the plugin
-         */
-        public static function uninstall(){
-
-        }       
-
-				public function register_scripts() {
-					wp_register_script( 'custom_js', INSPIRE_TRANSLATIONS_URL . 'assets/jquery.custom.js', array( 'jquery' ), 
-					INSPIRE_TRANSLATIONS_VERSION, true );
-					wp_register_script( 'validate_js', INSPIRE_TRANSLATIONS_URL . 'assets/jquery.validate.min.js', array( 'jquery' ), 
-					INSPIRE_TRANSLATIONS_VERSION, true );
+						$iptt_db_version = '1.0';
+						add_option( 'ipt_translation_db_version', $iptt_db_version );
 				}
 
+				if( $wpdb->get_row( "SELECT post_name FROM {$wpdb->prefix}posts WHERE post_name = 'submit-translation'" ) === null ){
+						
+						$current_user = wp_get_current_user();
+
+						$page = array(
+								'post_title'    => __('Submit Translation', 'inspire-translations' ),
+								'post_name' => 'submit-translation',
+								'post_status'   => 'publish',
+								'post_author'   => $current_user->ID,
+								'post_type' => 'page',
+								'post_content'  => '<!-- wp:shortcode -->[ipt_translations]<!-- /wp:shortcode -->'
+						);
+						wp_insert_post( $page );
+				}
+
+				if( $wpdb->get_row( "SELECT post_name FROM {$wpdb->prefix}posts WHERE post_name = 'edit-translation'" ) === null ){
+						
+						$current_user = wp_get_current_user();
+
+						$page = array(
+								'post_title'    => __('Edit Translation', 'inspire-translations' ),
+								'post_name' => 'edit-translation',
+								'post_status'   => 'publish',
+								'post_author'   => $current_user->ID,
+								'post_type' => 'page',
+								'post_content'  => '<!-- wp:shortcode -->[ipt_translations_edit]<!-- /wp:shortcode -->'
+						);
+						wp_insert_post( $page );
+				}
+		}
+
+		/**
+		 * Deactivate the plugin
+		 */
+		public static function deactivate(){
+				flush_rewrite_rules();
+				unregister_post_type( 'inspire-translations' );
+		}        
+
+		/**
+		 * Uninstall the plugin
+		 */
+		public static function uninstall(){
+
+		}       
+
+		public function register_scripts() {
+			wp_register_script( 'custom_js', INSPIRE_TRANSLATIONS_URL . 'assets/jquery.custom.js', array( 'jquery' ), 
+			INSPIRE_TRANSLATIONS_VERSION, true );
+			wp_register_script( 'validate_js', INSPIRE_TRANSLATIONS_URL . 'assets/jquery.validate.min.js', array( 'jquery' ), 
+			INSPIRE_TRANSLATIONS_VERSION, true );
+		}
+
+		public function load_custom_single_template( $tpl ) {
+			if ( is_singular( 'inspire-translations' ) ) {
+				$tpl = INSPIRE_TRANSLATIONS_PATH . 'views/templates/single-inspire-translations.php';
+			}
+			return $tpl;
+		}
 	}
 }
 
