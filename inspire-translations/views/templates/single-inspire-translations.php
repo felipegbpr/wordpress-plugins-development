@@ -19,7 +19,6 @@
 						$has_transliteration = $results[0]['meta_value'] == "Yes" ? "has-transliteration" : "";
 						$video_url = esc_url( $results[1]['meta_value'] );
 						$singers = get_the_terms( $post->ID, 'singers' );
-						var_dump($results);
 
             while( have_posts() ): 
                 the_post();
@@ -52,7 +51,7 @@
 																		global $wp_embed;
 																		$video_embed = $wp_embed->run_shortcode( '[embed width="560" height="315"]' . $video_url . 
 																		'[/embed]' );
-																		echo $video_embed;
+																		echo apply_filters( 'iptt_video', $video_embed, $post_title );
 																	 } 
 																	 ?>
                                 </div>
