@@ -148,7 +148,22 @@ if( !class_exists( 'Inspire_Translations' )){
 		 * Uninstall the plugin
 		 */
 		public static function uninstall(){
+			delete_option( 'ipt_translation_db_version' );
 
+			global $wpdb;
+
+			$wpdb->query(
+				"DELETE FROM $wpdb->posts
+				WHERE post_type = 'inspire-translations'"
+			);
+
+			$wpdb->query(
+				"DELETE FROM $wpdb->posts
+				WHERE post_type = 'page'
+				AND post_name = IN( 'submit-translation', 'edit-translation' )"
+			);
+
+			$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}translationmeta" );
 		}       
 
 		public function register_scripts() {
