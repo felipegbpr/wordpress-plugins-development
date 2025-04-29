@@ -146,6 +146,10 @@ if( !class_exists( 'Inspire_Translations' )){
 			INSPIRE_TRANSLATIONS_VERSION, true );
 			wp_register_script( 'validate_js', INSPIRE_TRANSLATIONS_URL . 'assets/jquery.validate.min.js', array( 'jquery' ), 
 			INSPIRE_TRANSLATIONS_VERSION, true );
+			if ( is_singular( 'inspire-translations' ) ) {
+				wp_enqueue_style( 'inspire-translations', INSPIRE_TRANSLATIONS_URL . 'assets/style.css', array(), 
+					INSPIRE_TRANSLATIONS_VERSION, 'all' );
+			}
 		}
 
 		public function load_custom_single_template( $tpl ) {
