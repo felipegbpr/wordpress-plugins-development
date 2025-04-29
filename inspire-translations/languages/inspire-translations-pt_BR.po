@@ -1,0 +1,231 @@
+# Blank WordPress Pot
+# Copyright 2014 ...
+# This file is distributed under the GNU General Public License v3 or later.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Inspire Translations v1.0.0\n"
+"Report-Msgid-Bugs-To: Translator Name "
+"<translations@example.com>\n"
+"POT-Creation-Date: 2025-04-29 15:04-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Your Team <translations@example.com>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Bookmarks: \n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: functions/functions.php:22
+msgid "Required form field is missing"
+msgstr "O campo de formulário obrigatório está faltando"
+
+#: functions/functions.php:26
+msgid "Username too short. At least 6 characters is required"
+msgstr "O nome de usuário é muito curto. Deve ter ao menos 6 caracteres"
+
+#: functions/functions.php:30
+msgid "Invalid credentials"
+msgstr "Credenciais inválidas"
+
+#: functions/functions.php:34
+msgid "The username you entered is not valid!"
+msgstr "O nome de usuário inserido não é válido"
+
+#: functions/functions.php:38
+msgid "Email is not valid"
+msgstr "Esse email não é válido"
+
+#: functions/functions.php:42
+msgid "Email already exists"
+msgstr "O email já existe"
+
+#: functions/functions.php:46
+msgid "Password length must be greater than 5"
+msgstr "Senha deve conter ao menos 5 caracteres"
+
+#: functions/functions.php:75
+msgid "Create your account"
+msgstr "Criar uma conta"
+
+#: functions/functions.php:77
+msgid "Username"
+msgstr "Nome de usuário"
+
+#: functions/functions.php:79
+msgid "First Name"
+msgstr "Primeiro  Nome"
+
+#: functions/functions.php:81
+msgid "Last Name"
+msgstr "Último Nome"
+
+#: functions/functions.php:83
+msgid "Email address"
+msgstr "Endereço de e-mail"
+
+#: functions/functions.php:85
+msgid "Password"
+msgstr "Senha"
+
+#: functions/functions.php:87
+msgid "Sign Up"
+msgstr "Registre-se"
+
+#: functions/functions.php:92
+msgid "Or login"
+msgstr "Ou faça login"
+
+#: inspire-translations.php:113
+msgid "Submit Translation"
+msgstr "Enviar tradução"
+
+#: inspire-translations.php:128
+msgid "Edit Translation"
+msgstr "Editar tradução"
+
+#: post-types/class.inspire-translations-cpt.php:21
+#: post-types/class.inspire-translations-cpt.php:25
+msgid "Translation"
+msgstr "Tradução"
+
+#: post-types/class.inspire-translations-cpt.php:22
+#: post-types/class.inspire-translations-cpt.php:24
+msgid "Translations"
+msgstr "Traduções"
+
+#: post-types/class.inspire-translations-cpt.php:52
+msgid "Singers"
+msgstr "Cantores"
+
+#: post-types/class.inspire-translations-cpt.php:53
+#: views/inspire-translations_edit_shortcode.php:97
+#: views/inspire-translations_shortcode.php:80
+#: views/templates/single-inspire-translations.php:33
+msgid "Singer"
+msgstr "Cantor"
+
+#: post-types/class.inspire-translations-cpt.php:77
+msgid "Translations Options"
+msgstr "Opções de tradução"
+
+#: views/inspire-translations_edit_shortcode.php:25
+#: views/inspire-translations_shortcode.php:25
+msgid "Please, enter a title"
+msgstr "Por favor, insira um título"
+
+#: views/inspire-translations_edit_shortcode.php:30
+#: views/inspire-translations_shortcode.php:30
+msgid "Please, enter a content"
+msgstr "Por favor, insira algum conteúdo."
+
+#: views/inspire-translations_edit_shortcode.php:35
+#: views/inspire-translations_shortcode.php:35
+msgid "Please, enter a singer"
+msgstr "Por favor, insira algum cantor"
+
+#: views/inspire-translations_edit_shortcode.php:79
+msgid "Edit translation"
+msgstr "Editar tradução"
+
+#: views/inspire-translations_edit_shortcode.php:93
+#: views/inspire-translations_shortcode.php:76
+#: views/inspire-translations_shortcode.php:139
+msgid "Title"
+msgstr "Título"
+
+#: views/inspire-translations_edit_shortcode.php:108
+#: views/inspire-translations_metabox.php:21
+#: views/inspire-translations_shortcode.php:95
+msgid "Has transliteration?"
+msgstr "Possui transliteração?"
+
+#: views/inspire-translations_edit_shortcode.php:110
+#: views/inspire-translations_metabox.php:25
+#: views/inspire-translations_shortcode.php:97
+#: views/inspire-translations_shortcode.php:151
+msgid "Yes"
+msgstr "Sim"
+
+#: views/inspire-translations_edit_shortcode.php:111
+#: views/inspire-translations_metabox.php:26
+#: views/inspire-translations_shortcode.php:98
+#: views/inspire-translations_shortcode.php:152
+msgid "No"
+msgstr "Não"
+
+#: views/inspire-translations_edit_shortcode.php:113
+#: views/inspire-translations_metabox.php:32
+#: views/inspire-translations_shortcode.php:100
+msgid "Video URL"
+msgstr "URL do vídeo"
+
+#: views/inspire-translations_edit_shortcode.php:122
+#: views/inspire-translations_shortcode.php:109
+msgid "Submit"
+msgstr "Enviar"
+
+#: views/inspire-translations_edit_shortcode.php:128
+msgid "Back to translations list"
+msgstr "Voltar para a lista de traduções"
+
+#: views/inspire-translations_shortcode.php:62
+msgid "Submit new translation"
+msgstr "Enviar nova tradução"
+
+#: views/inspire-translations_shortcode.php:135
+msgid "Your Translations"
+msgstr "Suas traduções"
+
+#: views/inspire-translations_shortcode.php:138
+msgid "Date"
+msgstr "Data"
+
+#: views/inspire-translations_shortcode.php:140
+msgid "Transliteration"
+msgstr "Transliteração"
+
+#: views/inspire-translations_shortcode.php:141
+msgid "Edit?"
+msgstr "Editar?"
+
+#: views/inspire-translations_shortcode.php:142
+msgid "Delete?"
+msgstr "Apagar?"
+
+#: views/inspire-translations_shortcode.php:143
+msgid "Status"
+msgstr "Status"
+
+#: views/inspire-translations_shortcode.php:154
+msgid "Edit"
+msgstr "Editar"
+
+#: views/inspire-translations_shortcode.php:157
+msgid "Delete"
+msgstr "Apagar"
+
+#: views/inspire-translations_shortcode.php:158
+msgid "Published"
+msgstr "Publicado"
+
+#: views/inspire-translations_shortcode.php:159
+msgid "Pending"
+msgstr "Pendente"
+
+#: views/templates/single-inspire-translations.php:39
+msgid "Author"
+msgstr "Autor"
+
+#: views/templates/single-inspire-translations.php:42
+msgid "Published on"
+msgstr "Publicado em"
