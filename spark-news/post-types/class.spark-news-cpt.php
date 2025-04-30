@@ -7,6 +7,7 @@ if ( ! class_exists( 'Spark_News_Post_Type' ) ) {
 			
 			add_action( 'init', array( $this, 'create_post_type' ) );
 
+			add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		}
 
 		public function create_post_type() {
@@ -35,6 +36,21 @@ if ( ! class_exists( 'Spark_News_Post_Type' ) ) {
 					'menu_icon' => 'dashicons-format-aside',
 				)
 			);
+		}
+
+		public function add_meta_boxes() {
+			add_meta_box(
+				'spark_news_meta_box',
+				esc_html__( 'News Options', 'spark-news' ),
+				array( $this, 'add_inner_meta_boxes' ),
+				'spark-news',
+				'normal',
+				'high'
+			);
+		}
+
+		public function add_inner_meta_boxes() {
+			require_once( SPARK_NEWS_PATH . 'views/spark-news_metabox.php' );
 		}
 
 	}
