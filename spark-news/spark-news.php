@@ -3,7 +3,7 @@
 /**
 * Plugin Name: Spark News
 * Plugin URI: https://www.wordpress.org/spark-news
-* Description: Este plugin adiciona um widget para gerenciamento e compartilhamento de notícias e informações sobre acontencimentos, fatos, entretenimento, esportes, etc.  
+* Description: This plugin adds a widget for managing and sharing news and information about events, facts, entertainment, sports, etc.  
 * Version: 1.0
 * Requires at least: 5.6
 * Requires PHP: 7.0
@@ -40,7 +40,10 @@ if ( !class_exists( 'Spark_News' ) ) {
         public function __construct() {
 
             // Define constants used througout the plugin
-            $this->define_constants();     
+            $this->define_constants();  
+						
+						require_once( SPARK_NEWS_PATH . 'post-types/class.spark-news-cpt.php' );
+						$SparkNewsPostType = new Spark_News_Post_Type();
             
         }
 
