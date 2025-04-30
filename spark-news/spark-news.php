@@ -3,7 +3,7 @@
 /**
 * Plugin Name: Spark News
 * Plugin URI: https://www.wordpress.org/spark-news
-* Description: My plugin's description
+* Description: Este plugin adiciona um widget para gerenciamento e compartilhamento de notícias e informações sobre acontencimentos, fatos, entretenimento, esportes, etc.  
 * Version: 1.0
 * Requires at least: 5.6
 * Requires PHP: 7.0
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( !class_exists( 'Spark_News' ) ){
+if ( !class_exists( 'Spark_News' ) ) {
 
     class Spark_News{
 
@@ -49,21 +49,23 @@ if ( !class_exists( 'Spark_News' ) ){
          */
         public function define_constants() {
             // Path/URL to root of this plugin, with trailing slash.
-               
+            define( 'SPARK_NEWS_PATH', plugin_dir_path( __FILE__ ) );   
+            define( 'SPARK_NEWS_URL', plugin_dir_url( __FILE__ ) );   
+            define( 'SPARK_NEWS_VERSION', '1.0.0');      
         }
 
         /**
          * Activate the plugin
          */
         public static function activate() {
-           
+           update_option( 'rewrite_rules', '' );
         }
 
         /**
          * Deactivate the plugin
          */
         public static function deactivate() {
-           
+           flush_rewrite_rules();
         }
 
         /**
@@ -78,5 +80,9 @@ if ( !class_exists( 'Spark_News' ) ){
 
 if ( class_exists( 'Spark_News' ) ) {
     // Installation and uninstallation hooks
-   
+   register_activation_hook( __FILE__, array( 'Spark_News', 'activate' ) );
+   register_deactivation_hook( __FILE__, array( 'Spark_News', 'deactivate' ) );
+   register_uninstall_hook( __FILE__, array( 'Spark_News', 'uninstall' ) );
+
+	 $spark_news = new Spark_News();
 }
