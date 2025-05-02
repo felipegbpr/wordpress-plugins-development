@@ -22,7 +22,7 @@
     </tr>
     <tr>
         <th>
-            <label for="spark_news_company"><?php esc_html_e( 'Author press vehicle', 'spark-news' ); ?></label>
+            <label for="spark_news_press_vehicle"><?php esc_html_e( 'Author press vehicle', 'spark-news' ); ?></label>
         </th>
         <td>
             <input 
