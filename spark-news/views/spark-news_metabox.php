@@ -1,8 +1,8 @@
 <?php
-    // $occupation = get_post_meta( $post->ID, 'spark_news_occupation', true );
-    // $press_vehicle = get_post_meta( $post->ID, 'spark_news_press_vehicle', true );
-    // $author_url = get_post_meta( $post->ID, 'spark_news_author_url', true );
-    // $video_url = get_post_meta( $post->ID, 'spark_news_video_url', true );
+    $occupation = get_post_meta( $post->ID, 'spark_news_occupation', true );
+    $press_vehicle = get_post_meta( $post->ID, 'spark_news_press_vehicle', true );
+    $author_url = get_post_meta( $post->ID, 'spark_news_author_url', true );
+    $video_url = get_post_meta( $post->ID, 'spark_news_video_url', true );
 ?>
 <table class="form-table spark-news-metabox"> 
     <input type="hidden" name="spark_news_nonce" value="<?php echo wp_create_nonce( "spark_news_nonce" ); ?>">
@@ -16,7 +16,7 @@
                 name="spark_news_occupation" 
                 id="spark_news_occupation" 
                 class="regular-text occupation"
-                value=""
+                value="<?php echo( isset( $occupation ) ) ? esc_html( $occupation ) : '' ?>"
             >
         </td>
     </tr>
@@ -30,7 +30,7 @@
                 name="spark_news_press_vehicle" 
                 id="spark_news_press_vehicle" 
                 class="regular-text press-vehicle"
-                value=""
+                value="<?php echo( isset( $press_vehicle ) ) ? esc_html( $press_vehicle ) : '' ?>"
             >
         </td>
     </tr>
@@ -44,7 +44,7 @@
                 name="spark_news_author_url" 
                 id="spark_news_author_url" 
                 class="regular-text author-url"
-                value=""
+                value="<?php echo( isset( $author_url ) ) ? esc_html( $author_url ) : '' ?>"
             >
         </td>
     </tr> 
@@ -58,7 +58,7 @@
                 name="spark_news_video_url" 
                 id="spark_news_video_url" 
                 class="regular-text video-url"
-                value=""
+                value="<?php echo( isset( $video_url ) ) ? esc_html( $video_url ) : '' ?>"
             >
         </td>
     </tr> 
