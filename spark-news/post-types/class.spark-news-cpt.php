@@ -23,7 +23,7 @@ if ( ! class_exists( 'Spark_News_Post_Type' ) ) {
 						'singular_name' => esc_html__( 'News', 'spark-news' )
 					),
 					'public'    => true,
-					'supports'  => array( 'title', 'editor', 'thumbnail' ),
+					'supports'  => array( 'title', 'editor', 'thumbnail'),
 					'hierarchical'  => false,
 					'show_ui'   => true,
 					'show_in_menu'  => true,
@@ -84,11 +84,14 @@ if ( ! class_exists( 'Spark_News_Post_Type' ) ) {
 				$new_author_url = $_POST['spark_news_author_url'];
 				$old_video_url = get_post_meta( 'spark_news_video_url', true );
 				$new_video_url = $_POST['spark_news_video_url'];
+				$old_author_name = get_post_meta( 'spark_news_author_name', true );
+				$new_author_name = $_POST['spark_news_author_name'];
 
 				update_post_meta( $post_id, 'spark_news_occupation', sanitize_text_field( $new_occupation ), $old_occupation );
 				update_post_meta( $post_id, 'spark_news_press_vehicle', sanitize_text_field( $new_press_vehicle ), $old_press_vehicle );
 				update_post_meta( $post_id, 'spark_news_author_url', sanitize_text_field( $new_author_url ), $old_author_url );
 				update_post_meta( $post_id, 'spark_news_video_url', sanitize_text_field( $new_video_url ), $old_video_url );
+				update_post_meta( $post_id, 'spark_news_author_name', sanitize_text_field( $new_author_name ), $old_author_name );
 
 			}
 		}

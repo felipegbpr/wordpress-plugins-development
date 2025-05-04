@@ -44,6 +44,9 @@ if ( !class_exists( 'Spark_News' ) ) {
 						
 						require_once( SPARK_NEWS_PATH . 'post-types/class.spark-news-cpt.php' );
 						$SparkNewsPostType = new Spark_News_Post_Type();
+
+						require_once( SPARK_NEWS_PATH . 'widgets/class.spark-news-widget.php' );
+						$SparkNewsWidget = new Spark_News_Widget();
             
         }
 

@@ -2,10 +2,25 @@
     $occupation = get_post_meta( $post->ID, 'spark_news_occupation', true );
     $press_vehicle = get_post_meta( $post->ID, 'spark_news_press_vehicle', true );
     $author_url = get_post_meta( $post->ID, 'spark_news_author_url', true );
+    $author_name = get_post_meta( $post->ID, 'spark_news_author_name', true );
     $video_url = get_post_meta( $post->ID, 'spark_news_video_url', true );
 ?>
 <table class="form-table spark-news-metabox"> 
     <input type="hidden" name="spark_news_nonce" value="<?php echo wp_create_nonce( "spark_news_nonce" ); ?>">
+		<tr>
+        <th>
+            <label for="spark_news_author_name"><?php esc_html_e( 'Author name', 'spark-news' ); ?></label>
+        </th>
+        <td>
+            <input 
+                type="text" 
+                name="spark_news_author_name" 
+                id="spark_news_author_name" 
+                class="regular-text author_name"
+                value="<?php echo( isset( $author_name ) ) ? esc_html( $author_name ) : '' ?>"
+            >
+        </td>
+    </tr>
     <tr>
         <th>
             <label for="spark_news_occupation"><?php esc_html_e( 'Author occupation', 'spark-news' ); ?></label>
