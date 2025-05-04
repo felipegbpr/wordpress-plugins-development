@@ -38,13 +38,13 @@ class Spark_News_Widget extends WP_Widget {
 			</p>
 
 			<p>
-					<label for="<?php echo $this->get_field_id( 'author_name' ); ?>"><?php esc_html_e( 'Author name', 'spark-news' ); ?>:</label>
-					<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'author_name' ); ?>" name="<?php echo $this->get_field_name( 'author_name' ); ?>" value="<?php echo esc_attr( $author_name ); ?>">
+					<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php esc_html_e( 'Number of news to show', 'spark-news' ); ?>:</label>
+					<input type="number" class="tiny-text" id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" step="1" min="1" size="3" value="<?php echo esc_attr( $number ); ?>">
 			</p>
 
 			<p>
-					<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php esc_html_e( 'Number of testimonials to show', 'spark-news' ); ?>:</label>
-					<input type="number" class="tiny-text" id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" step="1" min="1" size="3" value="<?php echo esc_attr( $number ); ?>">
+				<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'author_name' ); ?>" name="<?php echo $this->get_field_name( 'author_name' ); ?>" <?php checked( $author_name ); ?>>
+				<label for="<?php echo $this->get_field_id( 'author_name' ); ?>"><?php esc_html_e( 'Display author name?', 'spark-news' ); ?></label>
 			</p>
 
 			<p>
@@ -68,7 +68,7 @@ class Spark_News_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$default_title = 'Spark News';
 		$title = !empty( $instance['title'] ) ? $instance['title'] : $default_title;
-		$author_name = !empty( $instance['author_name'] ) ? $instance['author_name'] : '';
+		$author_name = !empty( $instance['author_name'] ) ? $instance['author_name'] : false;
 		$number = !empty( $instance['number'] ) ? $instance['number'] : 5;
 		$image = !empty( $instance['image'] ) ? $instance['image'] : false;
 		$press_vehicle = !empty( $instance['press_vehicle'] ) ? $instance['press_vehicle'] : false;
@@ -88,7 +88,7 @@ class Spark_News_Widget extends WP_Widget {
 	public function update($new_instance, $old_instance) {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
-		$instance['author_name'] = sanitize_text_field( $new_instance['author_name'] );
+		$instance['author_name'] = ! empty ( $new_instance['author_name'] ) ? 1 : 0 ;
 		$instance['number'] = (int) $new_instance['number'];
 		$instance['image'] = ! empty ( $new_instance['image'] ) ? 1 : 0;
 		$instance['press_vehicle'] = ! empty ( $new_instance['press_vehicle'] ) ? 1 : 0;
