@@ -77,10 +77,7 @@ class Spark_News_Widget extends WP_Widget {
 		echo $args['before_widget'];
 		echo $args['before_title'] . $title . $args['after_title'];
 
-		// TO-DO
-		// require( SPARK_NEWS_PATH . 'views/spark-news_widget.php' );
-
-		echo '<p>Widget Template View</p>';
+		require( SPARK_NEWS_PATH . 'views/spark-news_widget.php' );
 
 		echo $args['after_widget'];
 	}

@@ -1,6 +1,7 @@
 <?php
     $occupation = get_post_meta( $post->ID, 'spark_news_occupation', true );
     $press_vehicle = get_post_meta( $post->ID, 'spark_news_press_vehicle', true );
+    $press_vehicle_url = get_post_meta( $post->ID, 'spark_news_press_vehicle_url', true );
     $author_url = get_post_meta( $post->ID, 'spark_news_author_url', true );
     $author_name = get_post_meta( $post->ID, 'spark_news_author_name', true );
     $video_url = get_post_meta( $post->ID, 'spark_news_video_url', true );
@@ -35,6 +36,20 @@
             >
         </td>
     </tr>
+		<tr>
+        <th>
+            <label for="spark_news_author_url"><?php esc_html_e( 'Author URL', 'spark-news' ); ?></label>
+        </th>
+        <td>
+            <input 
+                type="url" 
+                name="spark_news_author_url" 
+                id="spark_news_author_url" 
+                class="regular-text author-url"
+                value="<?php echo( isset( $author_url ) ) ? esc_html( $author_url ) : '' ?>"
+            >
+        </td>
+    </tr> 
     <tr>
         <th>
             <label for="spark_news_press_vehicle"><?php esc_html_e( 'Author press vehicle', 'spark-news' ); ?></label>
@@ -49,20 +64,20 @@
             >
         </td>
     </tr>
-    <tr>
+		<tr>
         <th>
-            <label for="spark_news_author_url"><?php esc_html_e( 'Author URL', 'spark-news' ); ?></label>
+            <label for="spark_news_press_vehicle_url"><?php esc_html_e( 'Author press vehicle URL', 'spark-news' ); ?></label>
         </th>
         <td>
             <input 
-                type="url" 
-                name="spark_news_author_url" 
-                id="spark_news_author_url" 
-                class="regular-text author-url"
-                value="<?php echo( isset( $author_url ) ) ? esc_html( $author_url ) : '' ?>"
+                type="text" 
+                name="spark_news_press_vehicle_url" 
+                id="spark_news_press_vehicle_url" 
+                class="regular-text press-vehicle_url"
+                value="<?php echo( isset( $press_vehicle_url ) ) ? esc_html( $press_vehicle_url ) : '' ?>"
             >
         </td>
-    </tr> 
+    </tr>
 		<tr>
         <th>
             <label for="spark_news_video_url"><?php esc_html_e( 'Video URL', 'spark-news' ); ?></label>
