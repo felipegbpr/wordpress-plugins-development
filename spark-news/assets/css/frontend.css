@@ -1,0 +1,40 @@
+.widget-title {
+	text-align: center;
+}
+
+.widget_spark-news .news-item {
+	background-color: #fdfdfd;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	padding: 10px 30px 30px 30px;
+	margin-bottom: 2.5rem;
+}
+
+.widget_spark-news .news-item img {
+	height: 300px;
+	width: 100%;
+}
+
+.widget_spark-news .news-item p {
+	font-size: 1.8rem;
+	margin-top: 3rem;
+	text-align: justify;
+} 
+
+div.meta span {
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+div.meta a {
+	text-decoration: none;
+}
+
+.show-more {
+	margin-top: 4rem;
+	margin-left: 2rem;
+}
+
+.show-more a {
+	text-decoration: none;
+	margin-left: 1rem;
+}

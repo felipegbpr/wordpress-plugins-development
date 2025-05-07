@@ -27,7 +27,7 @@
 				<div class="thumb">
 					<?php 
 						if ( has_post_thumbnail() ) {
-							the_post_thumbnail( array( 520, 520 ) );
+							the_post_thumbnail( array( 500, 500) );
 						}
 					?>
 				</div>
@@ -36,10 +36,10 @@
 		</div>
 		<div class="meta">
 			<?php if ( $author_name ): ?>
-				<span class="author_name"><a href="<?php echo esc_attr( $author_url_meta ) ?>"><?php echo esc_html( $author_name_meta ); ?></a></span>
+				<span class="author_name"><a href="<?php echo esc_attr( $author_url_meta ) ?>"><?php echo esc_html( $author_name_meta ); ?></a></span><br>
 			<?php endif; ?>
 			<?php if ( $occupation ): ?>
-				<span class="occupation"><?php echo esc_html( $occupation_meta ); ?></span>
+				<span class="occupation"><?php echo esc_html( $occupation_meta . ',' ); ?></span>
 			<?php endif; ?>					
 			<?php if ( $press_vehicle ): ?>
 				<span class="press_vehicle"><a href="<?php echo esc_attr( $press_vehicle_meta_url ) ?>" target="_blank"><?php echo esc_html( $press_vehicle_meta ); ?></a></span>
@@ -51,4 +51,7 @@
 	wp_reset_postdata();
 endif;
 ?>
-<a href="<?php echo get_post_type_archive_link( 'spark-news' ); ?>"><?php echo esc_html_e( 'Show More News', 'spark-news' ); ?></a>
+
+<div class="show-more">
+	<a href="<?php echo get_post_type_archive_link( 'spark-news' ); ?>"><b><?php echo esc_html_e( 'Show More News', 'spark-news' ); ?></b></a>
+</div>

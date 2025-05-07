@@ -21,8 +21,22 @@ class Spark_News_Widget extends WP_Widget {
 				);
 			}
 		);
-		
+
+		if ( is_active_widget( false, false, $this->id_base ) ) {
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
+		}
 	} 
+
+
+	public function enqueue() {
+			wp_enqueue_style(
+				'spark-news-style-css',
+				SPARK_NEWS_URL . 'assets/css/frontend.css',
+				array(),
+				SPARK_NEWS_VERSION,
+				'all'
+			);
+	}
 
 	public function form( $instance ) {
 		$title = isset( $instance['title'] ) ? $instance['title'] : '';
