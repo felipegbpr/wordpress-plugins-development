@@ -19,8 +19,8 @@
 ?>
 
 	<div class="news-item">
-		<div class="title">
-			<h4><?php the_title(); ?></h4>
+		<div id="title" class="title">
+			<a href="<?php the_permalink( $post_id ) ?>" target="_blank"><?php the_title(); ?></a>
 		</div>
 		<div class="content">
 			<?php if ( $image ): ?>

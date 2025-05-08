@@ -23,7 +23,7 @@ if ( ! class_exists( 'Spark_News_Post_Type' ) ) {
 						'singular_name' => esc_html__( 'News', 'spark-news' )
 					),
 					'public'    => true,
-					'supports'  => array( 'title', 'editor', 'thumbnail'),
+					'supports'  => array( 'title', 'author', 'editor', 'thumbnail'),
 					'hierarchical'  => false,
 					'show_ui'   => true,
 					'show_in_menu'  => true,

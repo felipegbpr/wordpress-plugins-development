@@ -20,6 +20,27 @@
 	text-align: justify;
 } 
 
+#title {
+	/* margin: 1rem; */
+	padding-top: 1rem;
+	padding-bottom: 2rem;
+}
+
+#title a {
+	text-decoration: none;
+	color: #000;
+	font-weight: 600;
+	font-size: 2.5rem;
+	padding-bottom: 1.1rem;
+	transition: 1s transform ease-in-out;
+}
+
+#title a:hover {
+	text-decoration: underline;
+} 
+
+
+
 div.meta span {
 	font-size: 1.5rem;
 	font-weight: 600;
