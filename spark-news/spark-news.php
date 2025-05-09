@@ -39,26 +39,35 @@ if ( !class_exists( 'Spark_News' ) ) {
 
         public function __construct() {
 
-            // Define constants used througout the plugin
-            $this->define_constants();  
-						
-						require_once( SPARK_NEWS_PATH . 'post-types/class.spark-news-cpt.php' );
-						$SparkNewsPostType = new Spark_News_Post_Type();
+					add_action( 'init', array( $this, 'load_textdomain' ) );
 
-						require_once( SPARK_NEWS_PATH . 'widgets/class.spark-news-widget.php' );
-						$SparkNewsWidget = new Spark_News_Widget();
-            
+					// Define constants used througout the plugin
+					$this->define_constants();  
+					
+					require_once( SPARK_NEWS_PATH . 'post-types/class.spark-news-cpt.php' );
+					$SparkNewsPostType = new Spark_News_Post_Type();
+
+					require_once( SPARK_NEWS_PATH . 'widgets/class.spark-news-widget.php' );
+					$SparkNewsWidget = new Spark_News_Widget();
         }
 
          /**
          * Define Constants
          */
         public function define_constants() {
-            // Path/URL to root of this plugin, with trailing slash.
-            define( 'SPARK_NEWS_PATH', plugin_dir_path( __FILE__ ) );   
-            define( 'SPARK_NEWS_URL', plugin_dir_url( __FILE__ ) );   
-            define( 'SPARK_NEWS_VERSION', '1.0.0');      
+					// Path/URL to root of this plugin, with trailing slash.
+					define( 'SPARK_NEWS_PATH', plugin_dir_path( __FILE__ ) );   
+					define( 'SPARK_NEWS_URL', plugin_dir_url( __FILE__ ) );   
+					define( 'SPARK_NEWS_VERSION', '1.0.0');      
         }
+
+				public function load_textdomain(){
+					load_plugin_textdomain(
+							'spark-news',
+							false,
+							dirname( plugin_basename( __FILE__ ) ) . '/languages/'
+					);
+				}
 
         /**
          * Activate the plugin
@@ -93,17 +102,16 @@ if ( !class_exists( 'Spark_News' ) ) {
 					foreach ( $posts as $post ) {
 						wp_delete_post( $post->ID, true );
 					}
-
         }
 
     }
 }
 
 if ( class_exists( 'Spark_News' ) ) {
-    // Installation and uninstallation hooks
-   register_activation_hook( __FILE__, array( 'Spark_News', 'activate' ) );
-   register_deactivation_hook( __FILE__, array( 'Spark_News', 'deactivate' ) );
-   register_uninstall_hook( __FILE__, array( 'Spark_News', 'uninstall' ) );
+	// Installation and uninstallation hooks
+	register_activation_hook( __FILE__, array( 'Spark_News', 'activate' ) );
+	register_deactivation_hook( __FILE__, array( 'Spark_News', 'deactivate' ) );
+	register_uninstall_hook( __FILE__, array( 'Spark_News', 'uninstall' ) );
 
-	 $spark_news = new Spark_News();
+	$spark_news = new Spark_News();
 }
