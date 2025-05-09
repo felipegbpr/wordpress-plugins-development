@@ -71,6 +71,7 @@ if ( !class_exists( 'Spark_News' ) ) {
          * Deactivate the plugin
          */
         public static function deactivate() {
+					 unregister_post_type( 'spark-news' );
            flush_rewrite_rules();
         }
 
@@ -79,6 +80,20 @@ if ( !class_exists( 'Spark_News' ) ) {
          */
         public static function uninstall() {
 					
+					delete_option('widget_spark-news');
+
+					$posts = get_posts(
+						array(
+							'post_type'    => 'spark-news',
+							'number_posts' => -1,
+							'post_status'  => 'any'
+						)
+					);
+
+					foreach ( $posts as $post ) {
+						wp_delete_post( $post->ID, true );
+					}
+
         }
 
     }

@@ -4,7 +4,6 @@
     $press_vehicle_url = get_post_meta( $post->ID, 'spark_news_press_vehicle_url', true );
     $author_url = get_post_meta( $post->ID, 'spark_news_author_url', true );
     $author_name = get_post_meta( $post->ID, 'spark_news_author_name', true );
-    // $video_url = get_post_meta( $post->ID, 'spark_news_video_url', true );
 ?>
 <table class="form-table spark-news-metabox"> 
     <input type="hidden" name="spark_news_nonce" value="<?php echo wp_create_nonce( "spark_news_nonce" ); ?>">
@@ -78,18 +77,4 @@
             >
         </td>
     </tr>
-		<!-- <tr>
-        <th>
-            <label for="spark_news_video_url"><?php // esc_html_e( 'Video URL', 'spark-news' ); ?></label>
-        </th>
-        <td>
-            <input 
-                type="url" 
-                name="spark_news_video_url" 
-                id="spark_news_video_url" 
-                class="regular-text video-url"
-                value="<?php // echo( isset( $video_url ) ) ? esc_html( $video_url ) : '' ?>"
-            >
-        </td>
-    </tr>  -->
 </table>
